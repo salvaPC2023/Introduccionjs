@@ -1,18 +1,23 @@
-import sumar from "./sumador";
-import multiplicador from "./multiplicador";
+import sumar from "./sumador.js";
+import multiplicador from "./multiplicador.js";
 
 const first = document.querySelector("#primer-numero");
 const second = document.querySelector("#segundo-numero");
-const form = document.querySelector("#sumar-form");
-const f = document.querySelector("multiplicar-f");
+const form = document.querySelector("#calculadora-form");
 const div = document.querySelector("#resultado-div");
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+form.addEventListener("click", (event) => {
+  if (event.target.type === "submit") {
+    event.preventDefault();
 
-  const firstNumber = Number.parseInt(first.value);
-  const secondNumber = Number.parseInt(second.value);
+    const firstNumber = Number.parseInt(first.value);
+    const secondNumber = Number.parseInt(second.value);
+    const operation = event.target.value;
 
-  div.innerHTML = "<p>" + sumar(firstNumber, secondNumber) + "</p>";
-  div.innerHTML = "<p>" + multiplicador(firstNumber, secondNumber) + "</p>";
+    if (operation === "Sumar") {
+      div.innerHTML = "<p>Suma: " + sumar(firstNumber, secondNumber) + "</p>";
+    } else if (operation === "Multiplicar") {
+      div.innerHTML = "<p>Multiplicación: " + multiplicador(firstNumber, secondNumber) + "</p>";
+    }
+  }
 });
